@@ -41,7 +41,7 @@ export const shades = {
 export const theme = createTheme({
   palette: {
     primary: {
-      main: shades.primary[500],
+      main: shades.primary[400],
     },
     secondary: {
       main: shades.secondary[500],
@@ -56,7 +56,7 @@ export const theme = createTheme({
 
   typography: {
     fontFamily: ['Inter', 'sans-serif'].join(','),
-    fontSize: 11,
+    fontSize: 12,
     h1: {
       fontFamily: ['Inter', 'sans-serif'].join(','),
       fontSize: 48,

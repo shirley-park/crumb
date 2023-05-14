@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import Home from './scenes/home/Home'
 import ProductDetails from './scenes/productDetails/ProductDetails'
 import Checkout from './scenes/checkout/Checkout'
-import Confirmation from './scenes/checkout/confirmation'
+import CheckoutSuccess from './scenes/checkout/CheckoutSuccess'
+import Navbar from './scenes/global/Navbar'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()
@@ -19,12 +20,13 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <Navbar />
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="product/:productId" element={<ProductDetails />} />
           <Route path="checkout" element={<Checkout />} />
-          <Route path="checkout/success" element={<Confirmation />} />
+          <Route path="checkout/success" element={<CheckoutSuccess />} />
         </Routes>
       </BrowserRouter>
     </div>
