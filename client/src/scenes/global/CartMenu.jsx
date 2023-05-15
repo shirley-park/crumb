@@ -34,7 +34,7 @@ const CartMenu = () => {
     // overlay
     <Box
       display={isCartOpen ? 'Block' : 'none'}
-      backgroundColor="rgba(0, 0, 0, 0.4"
+      backgroundColor="rgba(0, 0, 0, 0.3)"
       position="fixed"
       zIndex={10}
       width="100%"
@@ -60,6 +60,92 @@ const CartMenu = () => {
               <CloseIcon />
             </IconButton>
           </FlexBox>
+
+          {/* shopping bag list */}
+          <Box>
+            {cart.map((item) => (
+              <Box key={item.attributes.id}>
+                <FlexBox p="15px 0">
+                  <Box flex="1 1 40%">
+                    <img
+                      src={`http://localhost:1337${item?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                      alt={item?.name}
+                      width="123px"
+                      height="164px"
+                    />
+                  </Box>
+                  <Box flex="1 1 60%">
+                    <FlexBox mb="5px">
+                      <Typography fontWeight="bold">
+                        {item.attributes.name}
+                      </Typography>
+                      <IconButton
+                        onClick={() =>
+                          dispatch(removeFromCart({ id: item.id }))
+                        }
+                      >
+                        <CloseIcon />
+                      </IconButton>
+                    </FlexBox>
+                    <Typography>{item.attributes.shortDescription}</Typography>
+                    <FlexBox m="15px 0">
+                      <Box
+                        display="flex"
+                        alignItems="center"
+                        border={`1.5px solid ${shades.neutral[500]}`}
+                      >
+                        <IconButton
+                          onClick={() =>
+                            dispatch(decreaseCount({ id: item.id }))
+                          }
+                        >
+                          <RemoveIcon />
+                        </IconButton>
+                        <Typography>{item.count}</Typography>
+                        <IconButton
+                          onClick={() =>
+                            dispatch(increaseCount({ id: item.id }))
+                          }
+                        >
+                          <AddIcon />
+                        </IconButton>
+                      </Box>
+
+                      {/* Price */}
+                      <Typography fontWeight="bold">
+                        ${item.attributes.price}
+                      </Typography>
+                    </FlexBox>
+                  </Box>
+                </FlexBox>
+                <Divider />
+              </Box>
+            ))}
+          </Box>
+
+          {/* Actions - subtotal, price, checkout */}
+          <Box m="20px 0">
+            <FlexBox m="20px 0">
+              <Typography fontWeight="bold">Subtotal</Typography>
+              <Typography fontWeight="bold">${totalPrice}</Typography>
+            </FlexBox>
+            <Button
+              sx={{
+                backgroundColor: shades.primary[400],
+                color: 'white',
+                borderRadius: '10px',
+                minWidth: '100%',
+                padding: '20px 40px',
+                m: '20px 0',
+              }}
+              onClick={() => {
+                navigate('/checkout')
+                dispatch(setIsCartOpen({}))
+              }}
+            >
+              Checkout
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Box>
