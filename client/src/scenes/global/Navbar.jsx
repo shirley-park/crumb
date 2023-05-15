@@ -5,7 +5,6 @@ import {
   ShoppingBagOutlined,
   MenuOutlined,
   SearchOutlined,
-  Search,
 } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { shades } from '../../theme'
@@ -51,9 +50,6 @@ const Navbar = () => {
         >
           <IconButton sx={{ color: '#424242' }}>
             <SearchOutlined />
-          </IconButton>
-          <IconButton sx={{ color: '#424242' }}>
-            <PersonOutline />
           </IconButton>
           <Badge
             badgeContent={cart.length}
