@@ -55,9 +55,27 @@ const Navbar = () => {
           <IconButton sx={{ color: '#424242' }}>
             <PersonOutline />
           </IconButton>
-          <IconButton sx={{ color: '#424242' }}>
-            <ShoppingBagOutlined />
-          </IconButton>
+          <Badge
+            badgeContent={cart.length}
+            color="secondary"
+            invisible={cart.length === 0}
+            sx={{
+              '& .MuiBadge-badge': {
+                right: 5,
+                top: 5,
+                padding: '0 4px',
+                height: '14px',
+                minWidth: '13px',
+              },
+            }}
+          >
+            <IconButton
+              onClick={() => setIsCartOpen({})}
+              sx={{ color: '#424242' }}
+            >
+              <ShoppingBagOutlined />
+            </IconButton>
+          </Badge>
           <IconButton sx={{ color: '#424242' }}>
             <MenuOutlined />
           </IconButton>
