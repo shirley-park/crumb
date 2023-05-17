@@ -3,7 +3,6 @@ import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
 import NavigateNextIcon from '@mui/icons-material/NavigateNext'
-// import { shades } from '../../theme'
 
 // import all images from assets folder
 const importAll = (r) =>
@@ -30,8 +29,8 @@ const HomeCarousel = () => {
           sx={{
             position: 'absolute',
             top: '50%',
-            left: '20%',
-            color: 'gray',
+            left: '2%',
+            color: 'white',
             padding: '5px',
             zIndex: '10',
           }}
@@ -45,8 +44,8 @@ const HomeCarousel = () => {
           sx={{
             position: 'absolute',
             top: '50%',
-            right: '20%',
-            color: 'gray',
+            right: '2%',
+            color: 'white',
             padding: '5px',
             zIndex: '10',
           }}
@@ -62,9 +61,8 @@ const HomeCarousel = () => {
             alt={`carousel-${index}`}
             style={{
               width: '100%',
-              height: '600px',
-              marginTop: '125px',
-              objectFit: 'contain',
+              height: '800px',
+              objectFit: 'cover',
               backgroundAttachment: 'fixed',
             }}
           />

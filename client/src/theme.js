@@ -58,8 +58,8 @@ export const theme = createTheme({
     fontFamily: ['Inter', 'sans-serif'].join(','),
     fontSize: 12,
     h1: {
-      fontFamily: ['Inter', 'sans-serif'].join(','),
-      fontSize: 48,
+      fontFamily: ['Nanum Myeonjo', 'serif'].join(','),
+      fontSize: 52,
     },
     h2: {
       fontFamily: ['Nanum Myeonjo', 'serif'].join(','),

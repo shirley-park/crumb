@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { Badge, Box, IconButton } from '@mui/material'
 import {
-  // PersonOutline,
   ShoppingBagOutlined,
   MenuOutlined,
   SearchOutlined,
@@ -21,7 +20,7 @@ const Navbar = () => {
       alignItems="center"
       width="100%"
       height="80px"
-      backgroundColor="rgba(255, 255, 255, 0.95)"
+      backgroundColor="rgba(255, 255, 255, 0)"
       color="black"
       position="fixed"
       top="0"
@@ -32,15 +31,16 @@ const Navbar = () => {
         width="80%"
         margin="auto"
         display="flex"
+        flex-direction="column"
         justifyContent="space-between"
         alignItems="center"
       >
         <Box
           onClick={() => navigate('/')}
           sx={{ '&:hover': { cursor: 'pointer' } }}
-          color={shades.primary[500]}
+          color={shades.neutral[100]}
         >
-          Sweaterweather
+          <h1>CRUMB</h1>
         </Box>
         <Box
           display="flex"
@@ -48,8 +48,8 @@ const Navbar = () => {
           columnGap="20px"
           zIndex="2"
         >
-          <IconButton sx={{ color: '#424242' }}>
-            <SearchOutlined />
+          <IconButton sx={{ color: '#cccccc' }}>
+            <SearchOutlined fontSize="large" />
           </IconButton>
           <Badge
             badgeContent={cart.length}
@@ -67,13 +67,13 @@ const Navbar = () => {
           >
             <IconButton
               onClick={() => dispatch(setIsCartOpen({}))}
-              sx={{ color: '#424242' }}
+              sx={{ color: '#cccccc' }}
             >
-              <ShoppingBagOutlined />
+              <ShoppingBagOutlined fontSize="large" />
             </IconButton>
           </Badge>
-          <IconButton sx={{ color: '#424242' }}>
-            <MenuOutlined />
+          <IconButton sx={{ color: '#cccccc' }}>
+            <MenuOutlined fontSize="large" />
           </IconButton>
         </Box>
       </Box>
