@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setItems } from '../../state'
+import Item from '../../components/Item'
+import { Typography } from '@mui/material'
+import Tabs from '@mui/material/Tabs'
+import Tab from '@mui/material/Tab'
+import Box from '@mui/material/Box'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const ProductList = () => {
   const dispatch = useDispatch()
-  const [value, setValue] = useState('all')
-
+  const [filterValue, setFilterValue] = useState('all')
+  const breakPoint = useMediaQuery('(min-width:600px)')
   const items = useSelector((state) => state.cart.items)
   console.log(items)
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
+  const handleChange = (event, newFilterValue) => {
+    setFilterValue(newFilterValue)
   }
 
   async function getItems() {
@@ -26,7 +32,39 @@ const ProductList = () => {
     getItems()
   }, [])
 
-  return <div>Bread!</div>
+  const breadItems = items.filter(
+    (item) => item.attributes.category === 'bread'
+  )
+
+  const pastryItems = items.filter(
+    (item) => item.attributes.category === 'pastry'
+  )
+
+  return (
+    <Box width="80%" margin="80px auto">
+      <Typography variant="h3" textAlign="center">
+        Browse our baked goods
+      </Typography>
+      <Tabs
+        textColor="primary"
+        indicatorColor="primary"
+        value={filterValue}
+        onChange={handleChange}
+        centered
+        TabIndicatorProps={{ sx: { display: breakPoint ? 'block' : 'none' } }}
+        sx={{
+          m: '25px',
+          '& .MuiTabs-flexContainer': {
+            flexWrap: 'wrap',
+          },
+        }}
+      >
+        <Tab label="All" value="all" />
+        <Tab label="Bread" value="bread" />
+        <Tab label="Pastry" value="pastry" />
+      </Tabs>
+    </Box>
+  )
 }
 
 export default ProductList

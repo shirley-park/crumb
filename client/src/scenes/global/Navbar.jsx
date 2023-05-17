@@ -6,7 +6,7 @@ import {
   SearchOutlined,
 } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
-import { shades, typography } from '../../theme'
+import { shades } from '../../theme'
 
 import { setIsCartOpen } from '../../state'
 
@@ -39,7 +39,7 @@ const Navbar = () => {
           onClick={() => navigate('/')}
           sx={{ '&:hover': { cursor: 'pointer' } }}
           color={shades.neutral[100]}
-          fontSize="34px"
+          fontSize="32px"
         >
           CRUMB
         </Box>
