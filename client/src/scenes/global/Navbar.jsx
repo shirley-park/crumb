@@ -6,7 +6,8 @@ import {
   SearchOutlined,
 } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
-import { shades } from '../../theme'
+import { shades, typography } from '../../theme'
+
 import { setIsCartOpen } from '../../state'
 
 const Navbar = () => {
@@ -28,10 +29,9 @@ const Navbar = () => {
       zIndex="1"
     >
       <Box
-        width="80%"
+        width="85%"
         margin="auto"
         display="flex"
-        flex-direction="column"
         justifyContent="space-between"
         alignItems="center"
       >
@@ -39,17 +39,14 @@ const Navbar = () => {
           onClick={() => navigate('/')}
           sx={{ '&:hover': { cursor: 'pointer' } }}
           color={shades.neutral[100]}
+          fontSize="34px"
         >
-          <h1>CRUMB</h1>
+          CRUMB
         </Box>
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          columnGap="20px"
-          zIndex="2"
-        >
+
+        <Box display="flex" justifyContent="end" columnGap="20px" zIndex="2">
           <IconButton sx={{ color: '#FFFFFF' }}>
-            <SearchOutlined fontSize="large" />
+            <SearchOutlined />
           </IconButton>
           <Badge
             badgeContent={cart.length}
@@ -69,11 +66,11 @@ const Navbar = () => {
               onClick={() => dispatch(setIsCartOpen({}))}
               sx={{ color: '#FFFFFF' }}
             >
-              <ShoppingBagOutlined fontSize="large" />
+              <ShoppingBagOutlined />
             </IconButton>
           </Badge>
           <IconButton sx={{ color: '#FFFFFF' }}>
-            <MenuOutlined fontSize="large" />
+            <MenuOutlined />
           </IconButton>
         </Box>
       </Box>

@@ -58,19 +58,19 @@ export const theme = createTheme({
     fontFamily: ['Inter', 'sans-serif'].join(','),
     fontSize: 12,
     h1: {
-      fontFamily: ['Nanum Myeonjo', 'serif'].join(','),
+      fontFamily: ['Marcellus', 'serif'].join(','),
       fontSize: 52,
     },
     h2: {
-      fontFamily: ['Nanum Myeonjo', 'serif'].join(','),
+      fontFamily: ['Marcellus', 'serif'].join(','),
       fontSize: 36,
     },
     h3: {
-      fontFamily: ['Nanum Myeonjo', 'serif'].join(','),
+      fontFamily: ['Marcellus', 'serif'].join(','),
       fontSize: 20,
     },
     h4: {
-      fontFamily: ['Nanum Myeonjo', 'serif'].join(','),
+      fontFamily: ['Marcellus', 'serif'].join(','),
       fontSize: 14,
     },
   },
