@@ -48,7 +48,7 @@ const Navbar = () => {
           columnGap="20px"
           zIndex="2"
         >
-          <IconButton sx={{ color: '#cccccc' }}>
+          <IconButton sx={{ color: '#FFFFFF' }}>
             <SearchOutlined fontSize="large" />
           </IconButton>
           <Badge
@@ -67,12 +67,12 @@ const Navbar = () => {
           >
             <IconButton
               onClick={() => dispatch(setIsCartOpen({}))}
-              sx={{ color: '#cccccc' }}
+              sx={{ color: '#FFFFFF' }}
             >
               <ShoppingBagOutlined fontSize="large" />
             </IconButton>
           </Badge>
-          <IconButton sx={{ color: '#cccccc' }}>
+          <IconButton sx={{ color: '#FFFFFF' }}>
             <MenuOutlined fontSize="large" />
           </IconButton>
         </Box>

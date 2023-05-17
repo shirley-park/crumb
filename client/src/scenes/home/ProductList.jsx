@@ -4,9 +4,14 @@ import { setItems } from '../../state'
 
 const ProductList = () => {
   const dispatch = useDispatch()
+  const [value, setValue] = useState('all')
 
   const items = useSelector((state) => state.cart.items)
   console.log(items)
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
 
   async function getItems() {
     const items = await fetch(
