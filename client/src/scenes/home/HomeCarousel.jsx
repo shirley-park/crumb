@@ -11,7 +11,7 @@ const importAll = (r) =>
     return images
   }, {})
 
-export const heroTextureImports = importAll(
+export const homeCarouselImages = importAll(
   require.context('../../assets', false, /\.(png|jpe?g|svg)$/)
 )
 
@@ -54,14 +54,14 @@ const HomeCarousel = () => {
         </IconButton>
       )}
     >
-      {Object.values(heroTextureImports).map((texture, index) => (
+      {Object.values(homeCarouselImages).map((texture, index) => (
         <Box key={`carousel-image-${index}`}>
           <img
             src={texture}
             alt={`carousel-${index}`}
             style={{
               width: '100%',
-              height: '800px',
+              height: '700px',
               objectFit: 'cover',
               backgroundAttachment: 'fixed',
             }}

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Badge, Box, IconButton } from '@mui/material'
 import {
   ShoppingBagOutlined,
-  MenuOutlined,
+  // MenuOutlined,
   SearchOutlined,
 } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
@@ -69,9 +69,9 @@ const Navbar = () => {
               <ShoppingBagOutlined />
             </IconButton>
           </Badge>
-          <IconButton sx={{ color: '#FFFFFF' }}>
+          {/* <IconButton sx={{ color: '#FFFFFF' }}>
             <MenuOutlined />
-          </IconButton>
+          </IconButton> */}
         </Box>
       </Box>
     </Box>

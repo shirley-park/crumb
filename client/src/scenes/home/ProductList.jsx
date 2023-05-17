@@ -12,18 +12,17 @@ const ProductList = () => {
   const dispatch = useDispatch()
   const [filterValue, setFilterValue] = useState('all')
   const breakPoint = useMediaQuery('(min-width:600px)')
-  const items = useSelector((state) => state.cart.items)
-  console.log(items)
 
-  const handleChange = (event, newFilterValue) => {
+  const items = useSelector((state) => state.cart.items)
+
+  const handleFilter = (event, newFilterValue) => {
     setFilterValue(newFilterValue)
   }
 
   async function getItems() {
-    const items = await fetch(
-      'http://localhost:1337/api/items?populate=image',
-      { method: 'GET' }
-    )
+    const items = await fetch('http://localhost:1337/api/items?populate=*', {
+      method: 'GET',
+    })
     const itemsJson = await items.json()
     dispatch(setItems(itemsJson.data))
   }
@@ -49,11 +48,11 @@ const ProductList = () => {
         textColor="primary"
         indicatorColor="primary"
         value={filterValue}
-        onChange={handleChange}
+        onChange={handleFilter}
         centered
         TabIndicatorProps={{ sx: { display: breakPoint ? 'block' : 'none' } }}
         sx={{
-          m: '25px',
+          m: '30px',
           '& .MuiTabs-flexContainer': {
             flexWrap: 'wrap',
           },
@@ -63,6 +62,27 @@ const ProductList = () => {
         <Tab label="Bread" value="bread" />
         <Tab label="Pastry" value="pastry" />
       </Tabs>
+      <Box
+        margin="0 auto"
+        display="grid"
+        gridTemplateColumns="repeat(auto-fill, 300px)"
+        justifyContent="space-around"
+        rowGap="50px"
+        columnGap="2%"
+      >
+        {filterValue === 'all' &&
+          items.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+        {filterValue === 'bread' &&
+          breadItems.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+        {filterValue === 'pastry' &&
+          pastryItems.map((item) => (
+            <Item item={item} key={`${item.name}-${item.id}`} />
+          ))}
+      </Box>
     </Box>
   )
 }

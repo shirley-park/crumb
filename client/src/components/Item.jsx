@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { shades } from '../theme'
+import { addToCart } from '../state'
 import { IconButton, Box, Typography, useTheme, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
-import { shades } from '../theme'
-import { addToCart } from '../state'
-import { useNavigate } from 'react-router-dom'
 
 const Item = ({ item, width }) => {
   const navigate = useNavigate()
@@ -15,16 +15,9 @@ const Item = ({ item, width }) => {
   const {
     palette: { neutral },
   } = useTheme()
+
   const { category, price, name, image } = item.attributes
-  const {
-    data: {
-      attributes: {
-        formats: {
-          medium: { url },
-        },
-      },
-    },
-  } = image
+  const imageAttributes = Object.assign({}, image.data[0].attributes)
 
   return (
     <Box width={width}>
@@ -34,10 +27,11 @@ const Item = ({ item, width }) => {
         onMouseOut={() => setIsHovered(false)}
       >
         <img
-          src={`http://localhost:1337${url}`}
+          src={`http://localhost:1337${imageAttributes.url}`}
           alt={item.name}
           width="300px"
           height="400px"
+          objectFit="fill"
           onClick={() => navigate(`/item/${item.id}`)}
           style={{ cursor: 'pointer' }}
         />
@@ -50,7 +44,7 @@ const Item = ({ item, width }) => {
           padding="0 5%"
         >
           <Box display="flex" justifyContent="space-between">
-            {/* Amount */}
+            {/* Quantity */}
             <Box
               display="flex"
               alignItems="center"
