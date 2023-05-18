@@ -1,9 +1,14 @@
 import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Badge, Box, IconButton, Typography } from '@mui/material'
+import {
+  Badge,
+  Box,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from '@mui/material'
 import { ShoppingBagOutlined, SearchOutlined } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
-
 import { setIsCartOpen } from '../../state'
 
 const Navbar = () => {
@@ -24,6 +29,8 @@ const Navbar = () => {
     window.addEventListener('scroll', handleNavbar)
   }, [])
 
+  const isNonMobile = useMediaQuery('(min-width:600px)')
+
   return (
     <>
       <Box
@@ -40,7 +47,12 @@ const Navbar = () => {
         left="0"
         zIndex="1"
       >
-        <Box width="80%" margin="auto" display="flex" justifyContent="center">
+        <Box
+          width="80%"
+          margin="auto"
+          display="flex"
+          justifyContent={isNonMobile ? 'center' : 'start'}
+        >
           <Box
             onClick={() => navigate('/')}
             sx={{ '&:hover': { cursor: 'pointer' } }}

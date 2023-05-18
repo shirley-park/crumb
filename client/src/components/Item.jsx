@@ -12,11 +12,11 @@ const Item = ({ item, width }) => {
   const dispatch = useDispatch()
   const [count, setCount] = useState(1)
   const [isHovered, setIsHovered] = useState(false)
-  const {
-    palette: { neutral },
-  } = useTheme()
+  // const {
+  //   palette: { neutral },
+  // } = useTheme()
 
-  const { category, price, name, image } = item.attributes
+  const { price, name, image } = item.attributes
   const imageAttributes = Object.assign({}, image.data[0].attributes)
 
   return (
@@ -73,12 +73,12 @@ const Item = ({ item, width }) => {
         </Box>
       </Box>
 
-      <Box mt="3px">
-        <Typography variant="subtitle2" color={neutral.dark}>
-          {category
-            .replace(/([A-Z])/g, '$1')
-            .replace(/^./, (string) => string.toUpperCase())}
-        </Typography>
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="space-between"
+        mt="3px"
+      >
         <Typography>{name}</Typography>
         <Typography fontWeight="bold">${price}</Typography>
       </Box>

@@ -16,7 +16,6 @@ export const homeCarouselImages = importAll(
 )
 
 const HomeCarousel = () => {
-  // const isNonMobile = useMediaQuery('(min-width:600px)')
   return (
     <Carousel
       infiniteLoop={true}
