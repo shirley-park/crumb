@@ -20,7 +20,7 @@ const FlexBox = styled(Box)`
   align-items: center;
 `
 
-const CartMenu = () => {
+const ShoppingCart = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart.cart)
@@ -152,4 +152,4 @@ const CartMenu = () => {
   )
 }
 
-export default CartMenu
+export default ShoppingCart
