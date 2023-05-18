@@ -56,7 +56,7 @@ export const theme = createTheme({
 
   typography: {
     fontFamily: ['Inter', 'sans-serif'].join(','),
-    fontSize: 12,
+    fontSize: 13,
     h1: {
       fontFamily: ['Marcellus', 'serif'].join(','),
       fontSize: 44,

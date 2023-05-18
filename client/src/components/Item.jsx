@@ -44,7 +44,7 @@ const Item = ({ item, width }) => {
           padding="0 5%"
         >
           <Box display="flex" justifyContent="space-between">
-            {/* Quantity */}
+            {/* Quantity counter */}
             <Box
               display="flex"
               alignItems="center"
@@ -60,7 +60,7 @@ const Item = ({ item, width }) => {
               </IconButton>
             </Box>
 
-            {/* Button */}
+            {/* Add to cart button */}
             <Button
               onClick={() => {
                 dispatch(addToCart({ item: { ...item, count } }))

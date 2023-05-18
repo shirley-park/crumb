@@ -91,11 +91,11 @@ const Navbar = () => {
             invisible={cart.length === 0}
             sx={{
               '& .MuiBadge-badge': {
-                right: 5,
-                top: 5,
-                padding: '0 4px',
-                height: '14px',
-                minWidth: '13px',
+                right: 50,
+                top: 30,
+                padding: '4px 4px',
+                height: '15px',
+                minWidth: '15px',
               },
             }}
           >
