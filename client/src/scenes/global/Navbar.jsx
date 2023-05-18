@@ -1,12 +1,8 @@
+import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Badge, Box, IconButton } from '@mui/material'
-import {
-  ShoppingBagOutlined,
-  // MenuOutlined,
-  SearchOutlined,
-} from '@mui/icons-material'
+import { Badge, Box, IconButton, Typography } from '@mui/material'
+import { ShoppingBagOutlined, SearchOutlined } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
-import { shades } from '../../theme'
 
 import { setIsCartOpen } from '../../state'
 
@@ -15,38 +11,67 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart.cart)
 
+  const [navbarBg, setNavbarBg] = useState(false)
+
+  useEffect(() => {
+    const handleNavbar = () => {
+      if (window.scrollY >= 95) {
+        setNavbarBg(true)
+      } else {
+        setNavbarBg(false)
+      }
+    }
+    window.addEventListener('scroll', handleNavbar)
+  }, [])
+
   return (
-    <Box
-      display="flex"
-      alignItems="center"
-      width="100%"
-      height="80px"
-      backgroundColor="rgba(255, 255, 255, 0)"
-      color="black"
-      position="fixed"
-      top="0"
-      left="0"
-      zIndex="1"
-    >
+    <>
       <Box
-        width="85%"
-        margin="auto"
         display="flex"
-        justifyContent="space-between"
         alignItems="center"
+        width="100%"
+        height="80px"
+        backgroundColor={
+          navbarBg ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0)'
+        }
+        color={navbarBg ? 'white' : 'black'}
+        position="fixed"
+        top="0"
+        left="0"
+        zIndex="1"
+      >
+        <Box width="80%" margin="auto" display="flex" justifyContent="center">
+          <Box
+            onClick={() => navigate('/')}
+            sx={{ '&:hover': { cursor: 'pointer' } }}
+            color={navbarBg ? 'black' : 'white'}
+          >
+            <Typography variant="h1">CRUMB</Typography>
+          </Box>
+        </Box>
+      </Box>
+
+      <Box
+        display="flex"
+        justifyContent="end"
+        width="100%"
+        margin="auto"
+        backgroundColor="rgba(255, 255, 255, 0)"
+        color="black"
+        position="fixed"
+        top="0"
+        left="0"
+        zIndex="1"
       >
         <Box
-          onClick={() => navigate('/')}
-          sx={{ '&:hover': { cursor: 'pointer' } }}
-          color={shades.neutral[100]}
-          fontSize="32px"
+          display="flex"
+          justifyContent="end"
+          height="80px"
+          columnGap="20px"
+          zIndex="2"
         >
-          CRUMB
-        </Box>
-
-        <Box display="flex" justifyContent="end" columnGap="20px" zIndex="2">
-          <IconButton sx={{ color: '#FFFFFF' }}>
-            <SearchOutlined />
+          <IconButton sx={{ color: `${navbarBg ? 'black' : 'white'}` }}>
+            <SearchOutlined fontSize="large" />
           </IconButton>
           <Badge
             badgeContent={cart.length}
@@ -64,17 +89,17 @@ const Navbar = () => {
           >
             <IconButton
               onClick={() => dispatch(setIsCartOpen({}))}
-              sx={{ color: '#FFFFFF' }}
+              sx={{
+                color: `${navbarBg ? 'black' : 'white'}`,
+                marginRight: '40px',
+              }}
             >
-              <ShoppingBagOutlined />
+              <ShoppingBagOutlined fontSize="large" />
             </IconButton>
           </Badge>
-          {/* <IconButton sx={{ color: '#FFFFFF' }}>
-            <MenuOutlined />
-          </IconButton> */}
         </Box>
       </Box>
-    </Box>
+    </>
   )
 }
 

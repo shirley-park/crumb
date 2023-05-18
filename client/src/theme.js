@@ -59,7 +59,7 @@ export const theme = createTheme({
     fontSize: 12,
     h1: {
       fontFamily: ['Marcellus', 'serif'].join(','),
-      fontSize: 52,
+      fontSize: 44,
     },
     h2: {
       fontFamily: ['Marcellus', 'serif'].join(','),
