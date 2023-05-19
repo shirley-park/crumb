@@ -28,7 +28,7 @@ const ProductList = () => {
   }
 
   useEffect(() => {
-    getItems()
+    getItems() // eslint-disable-next-line
   }, [])
 
   const breadItems = items.filter(

@@ -54,7 +54,7 @@ const HomeCarousel = () => {
       )}
     >
       {Object.values(homeCarouselImages).map((texture, index) => (
-        <Box key={`carousel-image-${index}`}>
+        <Box key={`carousel-image-${index}`} mt="60px">
           <img
             src={texture}
             alt={`carousel-${index}`}
