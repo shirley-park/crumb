@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+// import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Badge,
@@ -16,18 +16,18 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart.cart)
 
-  const [navbarBg, setNavbarBg] = useState(false)
+  // const [navbarBg, setNavbarBg] = useState(false)
 
-  useEffect(() => {
-    const handleNavbar = () => {
-      if (window.scrollY >= 95) {
-        setNavbarBg(true)
-      } else {
-        setNavbarBg(false)
-      }
-    }
-    window.addEventListener('scroll', handleNavbar)
-  }, [])
+  // useEffect(() => {
+  //   const handleNavbar = () => {
+  //     if (window.scrollY >= 95) {
+  //       setNavbarBg(true)
+  //     } else {
+  //       setNavbarBg(false)
+  //     }
+  //   }
+  //   window.addEventListener('scroll', handleNavbar)
+  // }, [])
 
   const isNonMobile = useMediaQuery('(min-width:600px)')
 
@@ -38,10 +38,8 @@ const Navbar = () => {
         alignItems="center"
         width="100%"
         height="80px"
-        backgroundColor={
-          navbarBg ? 'rgba(255, 255, 255, 0.95)' : 'rgba(255, 255, 255, 0)'
-        }
-        color={navbarBg ? 'white' : 'black'}
+        backgroundColor="rgba(255, 255, 255)"
+        color="black"
         position="fixed"
         top="0"
         left="0"
@@ -56,7 +54,7 @@ const Navbar = () => {
           <Box
             onClick={() => navigate('/')}
             sx={{ '&:hover': { cursor: 'pointer' } }}
-            color={navbarBg ? 'black' : 'white'}
+            color="black"
           >
             <Typography variant="h1">CRUMB</Typography>
           </Box>
@@ -66,6 +64,7 @@ const Navbar = () => {
       <Box
         display="flex"
         justifyContent="end"
+        alignContent="center"
         width="100%"
         margin="auto"
         backgroundColor="rgba(255, 255, 255, 0)"
@@ -78,11 +77,11 @@ const Navbar = () => {
         <Box
           display="flex"
           justifyContent="end"
-          height="80px"
           columnGap="20px"
           zIndex="2"
+          marginTop="15px"
         >
-          <IconButton sx={{ color: `${navbarBg ? 'black' : 'white'}` }}>
+          <IconButton sx={{ color: 'black' }}>
             <SearchOutlined fontSize="large" />
           </IconButton>
           <Badge
@@ -92,7 +91,7 @@ const Navbar = () => {
             sx={{
               '& .MuiBadge-badge': {
                 right: 50,
-                top: 30,
+                top: 18,
                 padding: '4px 4px',
                 height: '15px',
                 minWidth: '15px',
@@ -102,7 +101,7 @@ const Navbar = () => {
             <IconButton
               onClick={() => dispatch(setIsCartOpen({}))}
               sx={{
-                color: `${navbarBg ? 'black' : 'white'}`,
+                color: 'black',
                 marginRight: '40px',
               }}
             >
