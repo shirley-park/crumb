@@ -38,6 +38,9 @@
         "bread",
         "pastry"
       ]
+    },
+    "ingredients": {
+      "type": "richtext"
     }
   }
 }

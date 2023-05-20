@@ -24,18 +24,29 @@ const ProductDetails = () => {
   return (
     <Box width="80%" m="80px auto">
       {/* outer container */}
-      <Box display="flex" flexWrap="wrap">
-        <Box flex="1 1 40%">
+      <Box display="flex" flexWrap="wrap" columnGap="40px">
+        <Box flex="1 1 40%" m="40px">
           <img
             src={`http://localhost:1337${item?.attributes?.image?.data[0].attributes?.url}`}
             alt={item?.name}
-            width="123px"
-            height="164px"
+            width="100%"
+            // height="100%"
+            style={{ objectFit: 'contain' }}
           />
         </Box>
         <Box flex="1 1 40%">
-          <Typography>{item?.attributes?.name}</Typography>
-          <Typography>{item?.attributes?.price}</Typography>
+          <Box m="50px 0 20px 0">
+            <Typography variant="h3">{item?.attributes?.name}</Typography>
+            <Typography sx={{ mt: '10px' }}>
+              ${item?.attributes?.price}
+            </Typography>
+            <Typography sx={{ mt: '20px' }}>
+              {item?.attributes?.shortDescription}
+            </Typography>
+            <Typography sx={{ mt: '20px' }}>
+              {item?.attributes?.ingredients}
+            </Typography>
+          </Box>
         </Box>
       </Box>
     </Box>
