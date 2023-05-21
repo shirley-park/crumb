@@ -1,4 +1,3 @@
-// import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Badge,
@@ -16,19 +15,6 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart.cart)
 
-  // const [navbarBg, setNavbarBg] = useState(false)
-
-  // useEffect(() => {
-  //   const handleNavbar = () => {
-  //     if (window.scrollY >= 95) {
-  //       setNavbarBg(true)
-  //     } else {
-  //       setNavbarBg(false)
-  //     }
-  //   }
-  //   window.addEventListener('scroll', handleNavbar)
-  // }, [])
-
   const isNonMobile = useMediaQuery('(min-width:600px)')
 
   return (
@@ -40,47 +26,18 @@ const Navbar = () => {
         height="80px"
         backgroundColor="rgba(255, 255, 255)"
         color="black"
-        position="fixed"
-        top="0"
-        left="0"
-        zIndex="1"
       >
         <Box
-          width="80%"
+          width="100%"
           margin="auto"
           display="flex"
           justifyContent={isNonMobile ? 'center' : 'start'}
         >
-          <Box
-            onClick={() => navigate('/')}
-            sx={{ '&:hover': { cursor: 'pointer' } }}
-            color="black"
-          >
+          <button onClick={() => navigate('/')}>
             <Typography variant="h1">CRUMB</Typography>
-          </Box>
+          </button>
         </Box>
-      </Box>
-
-      <Box
-        display="flex"
-        justifyContent="end"
-        alignContent="center"
-        width="100%"
-        margin="auto"
-        backgroundColor="rgba(255, 255, 255, 0)"
-        color="black"
-        position="fixed"
-        top="0"
-        left="0"
-        zIndex="1"
-      >
-        <Box
-          display="flex"
-          justifyContent="end"
-          columnGap="20px"
-          zIndex="2"
-          marginTop="15px"
-        >
+        <Box display="flex" justifyContent="end" columnGap="20px">
           <IconButton sx={{ color: 'black' }}>
             <SearchOutlined fontSize="large" />
           </IconButton>

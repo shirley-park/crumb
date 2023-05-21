@@ -1,46 +1,24 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { Box, Typography, IconButton, Button } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
-import RemoveIcon from '@mui/icons-material/Remove'
+import { Add as AddIcon, Remove as RemoveIcon } from '@mui/icons-material'
 import { useDispatch } from 'react-redux'
 import { shades } from '../../theme'
 import { addToCart } from '../../state'
 import Item from '../../components/Item'
+import { useItemsQuery } from '../../hooks/useItemsQuery'
+import { useItemQuery } from '../../hooks/useItemQuery'
 
 const ProductDetails = () => {
   const { itemId } = useParams()
-  const [item, setItem] = useState(null)
   const dispatch = useDispatch()
   const [count, setCount] = useState(1)
-  const [otherItems, setOtherItems] = useState([])
 
-  async function getItem() {
-    const item = await fetch(
-      `http://localhost:1337/api/items/${itemId}?populate=image`,
-      {
-        method: 'GET',
-      }
-    )
-    const itemJson = await item.json()
-    setItem(itemJson.data)
-  }
+  const itemsQuery = useItemsQuery()
+  const items = itemsQuery.isSuccess ? itemsQuery.data.data : []
 
-  async function getOtherItems() {
-    const otherItems = await fetch(
-      `http://localhost:1337/api/items?populate=*`,
-      {
-        method: 'GET',
-      }
-    )
-    const otherItemsJson = await otherItems.json()
-    setOtherItems(otherItemsJson.data)
-  }
-
-  useEffect(() => {
-    getItem()
-    getOtherItems() // eslint-disable-next-line
-  }, [itemId])
+  const itemQuery = useItemQuery(itemId)
+  const item = itemQuery.isSuccess ? itemQuery.data : []
 
   return (
     <Box width="80%" m="80px auto">
@@ -112,14 +90,11 @@ const ProductDetails = () => {
           flexWrap="wrap"
           justifyContent="space-between"
         >
-          {otherItems
-            .filter((otherItem) => otherItem.id !== Number(itemId))
+          {items
+            .filter((item) => item.id !== Number(itemId))
             .slice(0, 3)
-            .map((otherItems) => (
-              <Item
-                item={otherItems}
-                key={`${otherItems.name}-${otherItems.id}`}
-              />
+            .map((item) => (
+              <Item item={item} key={`${item.name}-${item.id}`} />
             ))}
         </Box>
       </Box>

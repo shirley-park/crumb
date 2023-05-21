@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "framer-motion": "^10.12.12"
+    "framer-motion": "^10.12.12",
+    "react-query": "^3.39.3"
   }
 }

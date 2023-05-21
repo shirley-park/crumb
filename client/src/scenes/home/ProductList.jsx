@@ -1,36 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { setItems } from '../../state'
+import React, { useState } from 'react'
 import Item from '../../components/Item'
 import { Typography } from '@mui/material'
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
-import Box from '@mui/material/Box'
+import { Tabs, Tab, Box } from '@mui/material'
 import useMediaQuery from '@mui/material/useMediaQuery'
 import { AnimatePresence } from 'framer-motion'
+import { useItemsQuery } from '../../hooks/useItemsQuery'
 
 const ProductList = () => {
-  const dispatch = useDispatch()
   const [filterValue, setFilterValue] = useState('all')
   const breakPoint = useMediaQuery('(min-width:600px)')
-
-  const items = useSelector((state) => state.cart.items)
 
   const handleFilter = (event, newFilterValue) => {
     setFilterValue(newFilterValue)
   }
 
-  async function getItems() {
-    const items = await fetch('http://localhost:1337/api/items?populate=*', {
-      method: 'GET',
-    })
-    const itemsJson = await items.json()
-    dispatch(setItems(itemsJson.data))
-  }
+  const itemsQuery = useItemsQuery(filterValue)
 
-  useEffect(() => {
-    getItems() // eslint-disable-next-line
-  }, [])
+  const items = itemsQuery.isSuccess ? itemsQuery.data.data : []
 
   const breadItems = items.filter(
     (item) => item.attributes.category === 'bread'
