@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Box, Typography } from '@mui/material'
+import { Box, Typography, IconButton, Button } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add'
+import RemoveIcon from '@mui/icons-material/Remove'
+import { useDispatch } from 'react-redux'
+import { shades } from '../../theme'
+import { addToCart } from '../../state'
 
 const ProductDetails = () => {
   const { itemId } = useParams()
   const [item, setItem] = useState(null)
+  const dispatch = useDispatch()
+  const [count, setCount] = useState(1)
 
   async function getItem() {
     const item = await fetch(
@@ -29,9 +36,7 @@ const ProductDetails = () => {
           <img
             src={`http://localhost:1337${item?.attributes?.image?.data[0].attributes?.url}`}
             alt={item?.name}
-            width="100%"
-            // height="100%"
-            style={{ objectFit: 'contain' }}
+            width="90%"
           />
         </Box>
         <Box flex="1 1 40%">
@@ -46,6 +51,39 @@ const ProductDetails = () => {
             <Typography sx={{ mt: '20px' }}>
               {item?.attributes?.ingredients}
             </Typography>
+          </Box>
+
+          <Box display="flex" justifyContent="start" mt="30px">
+            {/* Quantity */}
+            <Box
+              display="flex"
+              alignItems="center"
+              backgroundColor={shades.neutral[100]}
+              borderRadius="20px"
+            >
+              <IconButton onClick={() => setCount(Math.max(count - 1, 1))}>
+                <RemoveIcon />
+              </IconButton>
+              <Typography color={shades.primary[300]}>{count}</Typography>
+              <IconButton onClick={() => setCount(count + 1)}>
+                <AddIcon />
+              </IconButton>
+            </Box>
+
+            {/* Add to cart button */}
+            <Button
+              onClick={() => {
+                dispatch(addToCart({ item: { ...item, count } }))
+              }}
+              sx={{
+                backgroundColor: shades.primary[300],
+                color: 'white',
+                marginLeft: '20px',
+                borderRadius: '20px',
+              }}
+            >
+              Add to cart
+            </Button>
           </Box>
         </Box>
       </Box>
