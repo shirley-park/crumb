@@ -1,4 +1,3 @@
-// import { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   Badge,
@@ -29,47 +28,43 @@ const Navbar = () => {
         color="black"
       >
         <Box
-          width="80%"
+          width="100%"
           margin="auto"
           display="flex"
           justifyContent={isNonMobile ? 'center' : 'start'}
         >
-          <Box
-            onClick={() => navigate('/')}
-            sx={{ '&:hover': { cursor: 'pointer' } }}
-          >
+          <button onClick={() => navigate('/')}>
             <Typography variant="h1">CRUMB</Typography>
-          </Box>
-
-          <Box display="flex" justifyContent="end" columnGap="20px">
-            <IconButton sx={{ color: 'black' }}>
-              <SearchOutlined fontSize="large" />
-            </IconButton>
-            <Badge
-              badgeContent={cart.length}
-              color="secondary"
-              invisible={cart.length === 0}
+          </button>
+        </Box>
+        <Box display="flex" justifyContent="end" columnGap="20px">
+          <IconButton sx={{ color: 'black' }}>
+            <SearchOutlined fontSize="large" />
+          </IconButton>
+          <Badge
+            badgeContent={cart.length}
+            color="secondary"
+            invisible={cart.length === 0}
+            sx={{
+              '& .MuiBadge-badge': {
+                right: 50,
+                top: 18,
+                padding: '4px 4px',
+                height: '15px',
+                minWidth: '15px',
+              },
+            }}
+          >
+            <IconButton
+              onClick={() => dispatch(setIsCartOpen({}))}
               sx={{
-                '& .MuiBadge-badge': {
-                  right: 50,
-                  top: 18,
-                  padding: '4px 4px',
-                  height: '15px',
-                  minWidth: '15px',
-                },
+                color: 'black',
+                marginRight: '40px',
               }}
             >
-              <IconButton
-                onClick={() => dispatch(setIsCartOpen({}))}
-                sx={{
-                  color: 'black',
-                  marginRight: '40px',
-                }}
-              >
-                <ShoppingBagOutlined fontSize="large" />
-              </IconButton>
-            </Badge>
-          </Box>
+              <ShoppingBagOutlined fontSize="large" />
+            </IconButton>
+          </Badge>
         </Box>
       </Box>
     </>
