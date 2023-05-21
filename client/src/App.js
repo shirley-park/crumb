@@ -20,8 +20,8 @@ const ScrollToTop = () => {
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
+    <BrowserRouter>
+      <div className="App">
         <Navbar />
         <ScrollToTop />
         <Routes>
@@ -32,8 +32,8 @@ function App() {
         </Routes>
         <ShoppingCart />
         <Footer />
-      </BrowserRouter>
-    </div>
+      </div>
+    </BrowserRouter>
   )
 }
 
