@@ -106,10 +106,21 @@ const ProductDetails = () => {
         <Typography variant="h3" textAlign="left">
           You may also like
         </Typography>
-        <Box display="flex" flexWrap="wrap" justifyContent="space-between">
-          {otherItems.map((otherItem) => (
-            <Item item={otherItem} key={`${otherItem.name}-${otherItem.id}`} />
-          ))}
+        <Box
+          mt="30px"
+          display="flex"
+          flexWrap="wrap"
+          justifyContent="space-between"
+        >
+          {otherItems
+            .filter((otherItem) => otherItem.id !== Number(itemId))
+            .slice(0, 3)
+            .map((otherItems) => (
+              <Item
+                item={otherItems}
+                key={`${otherItems.name}-${otherItems.id}`}
+              />
+            ))}
         </Box>
       </Box>
     </Box>
