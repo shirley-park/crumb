@@ -1,11 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  Badge,
-  Box,
-  IconButton,
-  Typography,
-  useMediaQuery,
-} from '@mui/material'
+import { Badge, Box, IconButton, Typography } from '@mui/material'
 import { ShoppingBagOutlined, SearchOutlined } from '@mui/icons-material'
 import { useNavigate } from 'react-router-dom'
 import { setIsCartOpen } from '../../state'
@@ -15,56 +9,52 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart.cart)
 
-  const isNonMobile = useMediaQuery('(min-width:600px)')
-
   return (
     <>
       <Box
+        position="sticky"
+        top="0"
+        left="0"
         display="flex"
+        justifyContent="center"
         alignItems="center"
-        width="100%"
         height="80px"
         backgroundColor="rgba(255, 255, 255)"
-        color="black"
+        zIndex="1"
       >
-        <Box
-          width="100%"
-          margin="auto"
-          display="flex"
-          justifyContent={isNonMobile ? 'center' : 'start'}
-        >
+        <Box width="80%" display="flex" justifyContent="space-between">
           <button onClick={() => navigate('/')}>
             <Typography variant="h1">CRUMB</Typography>
           </button>
-        </Box>
-        <Box display="flex" justifyContent="end" columnGap="20px">
-          <IconButton sx={{ color: 'black' }}>
-            <SearchOutlined fontSize="large" />
-          </IconButton>
-          <Badge
-            badgeContent={cart.length}
-            color="secondary"
-            invisible={cart.length === 0}
-            sx={{
-              '& .MuiBadge-badge': {
-                right: 50,
-                top: 18,
-                padding: '4px 4px',
-                height: '15px',
-                minWidth: '15px',
-              },
-            }}
-          >
-            <IconButton
-              onClick={() => dispatch(setIsCartOpen({}))}
+
+          <Box>
+            <IconButton sx={{ color: 'black', marginRight: '15px' }}>
+              <SearchOutlined fontSize="large" />
+            </IconButton>
+            <Badge
+              badgeContent={cart.length}
+              color="secondary"
+              invisible={cart.length === 0}
               sx={{
-                color: 'black',
-                marginRight: '40px',
+                '& .MuiBadge-badge': {
+                  right: 38,
+                  top: 18,
+                  padding: '4px 4px',
+                  height: '15px',
+                  minWidth: '15px',
+                },
               }}
             >
-              <ShoppingBagOutlined fontSize="large" />
-            </IconButton>
-          </Badge>
+              <IconButton
+                onClick={() => dispatch(setIsCartOpen({}))}
+                sx={{
+                  color: 'black',
+                }}
+              >
+                <ShoppingBagOutlined fontSize="large" />
+              </IconButton>
+            </Badge>
+          </Box>
         </Box>
       </Box>
     </>
