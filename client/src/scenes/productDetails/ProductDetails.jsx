@@ -24,14 +24,15 @@ const ProductDetails = () => {
     <Box width="80%" m="80px auto">
       {/* product detail container */}
       <Box display="flex" flexWrap="wrap" columnGap="40px">
-        <Box flex="1 1 40%" m="40px">
+        <Box flex="1 1 40%">
           <img
             src={`http://localhost:1337${item?.attributes?.image?.data[0].attributes?.url}`}
             alt={item?.name}
-            width="90%"
+            width="100%"
+            style={{ objectFit: 'contain' }}
           />
         </Box>
-        <Box flex="1 1 40%">
+        <Box flex="1 1 40%" mb="40px">
           <Box m="50px 0 20px 0">
             <Typography variant="h3">{item?.attributes?.name}</Typography>
             <Typography sx={{ mt: '10px' }}>
@@ -80,7 +81,7 @@ const ProductDetails = () => {
         </Box>
       </Box>
 
-      <Box mt="50px" width="100%">
+      <Box mt="60px" width="100%">
         <Typography variant="h3" textAlign="left">
           You may also like
         </Typography>
@@ -89,10 +90,11 @@ const ProductDetails = () => {
           display="flex"
           flexWrap="wrap"
           justifyContent="space-between"
+          rowGap="20px"
         >
           {items
             .filter((item) => item.id !== Number(itemId))
-            .slice(0, 3)
+            .slice(0, 4)
             .map((item) => (
               <Item item={item} key={`${item.name}-${item.id}`} />
             ))}
