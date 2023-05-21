@@ -6,12 +6,14 @@ import RemoveIcon from '@mui/icons-material/Remove'
 import { useDispatch } from 'react-redux'
 import { shades } from '../../theme'
 import { addToCart } from '../../state'
+import Item from '../../components/Item'
 
 const ProductDetails = () => {
   const { itemId } = useParams()
   const [item, setItem] = useState(null)
   const dispatch = useDispatch()
   const [count, setCount] = useState(1)
+  const [otherItems, setOtherItems] = useState([])
 
   async function getItem() {
     const item = await fetch(
@@ -24,13 +26,25 @@ const ProductDetails = () => {
     setItem(itemJson.data)
   }
 
+  async function getOtherItems() {
+    const otherItems = await fetch(
+      `http://localhost:1337/api/items?populate=*`,
+      {
+        method: 'GET',
+      }
+    )
+    const otherItemsJson = await otherItems.json()
+    setOtherItems(otherItemsJson.data)
+  }
+
   useEffect(() => {
-    getItem() // eslint-disable-next-line
+    getItem()
+    getOtherItems() // eslint-disable-next-line
   }, [itemId])
 
   return (
     <Box width="80%" m="80px auto">
-      {/* outer container */}
+      {/* product detail container */}
       <Box display="flex" flexWrap="wrap" columnGap="40px">
         <Box flex="1 1 40%" m="40px">
           <img
@@ -85,6 +99,28 @@ const ProductDetails = () => {
               Add to cart
             </Button>
           </Box>
+        </Box>
+      </Box>
+
+      <Box mt="50px" width="100%">
+        <Typography variant="h3" textAlign="left">
+          You may also like
+        </Typography>
+        <Box
+          mt="30px"
+          display="flex"
+          flexWrap="wrap"
+          justifyContent="space-between"
+        >
+          {otherItems
+            .filter((otherItem) => otherItem.id !== Number(itemId))
+            .slice(0, 3)
+            .map((otherItems) => (
+              <Item
+                item={otherItems}
+                key={`${otherItems.name}-${otherItems.id}`}
+              />
+            ))}
         </Box>
       </Box>
     </Box>
