@@ -6,6 +6,7 @@ import { addToCart } from '../state'
 import { IconButton, Box, Typography, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
+import { motion } from 'framer-motion'
 
 const Item = ({ item, width }) => {
   const navigate = useNavigate()
@@ -17,7 +18,15 @@ const Item = ({ item, width }) => {
   const imageAttributes = Object.assign({}, image.data[0].attributes)
 
   return (
-    <Box width={width}>
+    <motion.div
+      width={width}
+      key={item.id}
+      layout
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 1 }}
+      transition={{ duation: 0.5 }}
+    >
       <Box
         position="relative"
         onMouseOver={() => setIsHovered(true)}
@@ -83,7 +92,7 @@ const Item = ({ item, width }) => {
         <Typography>{name}</Typography>
         <Typography fontWeight="bold">${price}</Typography>
       </Box>
-    </Box>
+    </motion.div>
   )
 }
 

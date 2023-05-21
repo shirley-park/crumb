@@ -7,6 +7,7 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 import useMediaQuery from '@mui/material/useMediaQuery'
+import { AnimatePresence } from 'framer-motion'
 
 const ProductList = () => {
   const dispatch = useDispatch()
@@ -62,6 +63,7 @@ const ProductList = () => {
         <Tab label="Bread" value="bread" />
         <Tab label="Pastry" value="pastry" />
       </Tabs>
+
       <Box
         margin="0 auto"
         display="grid"
@@ -70,18 +72,20 @@ const ProductList = () => {
         rowGap="50px"
         columnGap="2%"
       >
-        {filterValue === 'all' &&
-          items.map((item) => (
-            <Item item={item} key={`${item.name}-${item.id}`} />
-          ))}
-        {filterValue === 'bread' &&
-          breadItems.map((item) => (
-            <Item item={item} key={`${item.name}-${item.id}`} />
-          ))}
-        {filterValue === 'pastry' &&
-          pastryItems.map((item) => (
-            <Item item={item} key={`${item.name}-${item.id}`} />
-          ))}
+        <AnimatePresence>
+          {filterValue === 'all' &&
+            items.map((item) => (
+              <Item item={item} key={`${item.name}-${item.id}`} />
+            ))}
+          {filterValue === 'bread' &&
+            breadItems.map((item) => (
+              <Item item={item} key={`${item.name}-${item.id}`} />
+            ))}
+          {filterValue === 'pastry' &&
+            pastryItems.map((item) => (
+              <Item item={item} key={`${item.name}-${item.id}`} />
+            ))}
+        </AnimatePresence>
       </Box>
     </Box>
   )
