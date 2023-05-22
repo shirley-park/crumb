@@ -4,10 +4,19 @@ import { Formik } from 'formik'
 import { useState } from 'react'
 import * as yup from 'yup'
 import { shades } from '../../theme'
-import AddressForm from './AddressForm'
+import BillingInfo from './BillingInfo'
 
 const initialValues = {
   billingAddress: {
+    firstName: '',
+    lastName: '',
+    streetAddress: '',
+    city: '',
+    postcode: '',
+    country: '',
+  },
+  shippingAddress: {
+    isSameAddress: true,
     firstName: '',
     lastName: '',
     streetAddress: '',
@@ -30,6 +39,7 @@ const checkoutSchema = [
       country: yup.string().required('required'),
     }),
     shippingAddress: yup.object().shape({
+      isSameAddress: yup.boolean(),
       firstName: yup.string().required('required'),
       lastName: yup.string().required('required'),
       streetAddress: yup.string().required('required'),
@@ -51,12 +61,22 @@ const Checkout = () => {
   const isSecondStep = activeStep === 1
   const isThirdStep = activeStep === 2
 
-  const handleFormSubmit = async (value, actions) => {
+  console.log(cart)
+  console.log(isThirdStep)
+
+  const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1)
+
+    if (isFirstStep && values.shippingAddress.isSameAddress) {
+      actions.setFieldValue('shippingAddress', {
+        ...values.billingAddress,
+        isSameAddress: true,
+      })
+    }
   }
 
   return (
-    <Box width="50%" m="100px auto">
+    <Box width="70%" m="100px auto">
       <Stepper activeStep={activeStep}>
         <Step>
           <StepLabel>Billing</StepLabel>
@@ -74,7 +94,60 @@ const Checkout = () => {
           initialValues={initialValues}
           validationSchema={checkoutSchema[activeStep]}
         >
-          <AddressForm />
+          {({
+            values,
+            errors,
+            touched,
+            handleBlur,
+            handleChange,
+            handleSubmit,
+            setFieldValue,
+          }) => (
+            <form onSubmit={handleSubmit}>
+              {isFirstStep && (
+                <BillingInfo
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+
+              <Box display="flex" justifyContent="space-between" gap="50px">
+                {!isFirstStep && (
+                  <Button
+                    fullWidth
+                    variant="contained"
+                    sx={{
+                      backgroundColor: shades.primary[200],
+                      borderRadius: '30px',
+                      marginTop: '30px',
+                      padding: '15px 40px',
+                    }}
+                    onClick={() => setActiveStep(activeStep - 1)}
+                  >
+                    Back
+                  </Button>
+                )}
+                <Button
+                  fullWidth
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  sx={{
+                    backgroundColor: shades.primary[200],
+                    borderRadius: '30px',
+                    marginTop: '30px',
+                    padding: '15px 40px',
+                  }}
+                >
+                  {!isSecondStep ? 'Next' : 'Place Order'}
+                </Button>
+              </Box>
+            </form>
+          )}
         </Formik>
       </Box>
     </Box>
