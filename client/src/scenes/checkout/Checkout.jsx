@@ -5,6 +5,7 @@ import { useState } from 'react'
 import * as yup from 'yup'
 import { shades } from '../../theme'
 import BillingInfo from './BillingInfo'
+import ShippingInfo from './ShippingInfo'
 
 const initialValues = {
   billingAddress: {
@@ -73,10 +74,19 @@ const Checkout = () => {
         isSameAddress: true,
       })
     }
+
+    if (isSecondStep) {
+      makePayment(values)
+    }
+
+    actions.setTouched({})
   }
+
+  async function makePayment() {}
 
   return (
     <Box width="70%" m="100px auto">
+      {/* CHECKOUT STEPS */}
       <Stepper activeStep={activeStep}>
         <Step>
           <StepLabel>Billing</StepLabel>
@@ -88,6 +98,7 @@ const Checkout = () => {
           <StepLabel>Payment</StepLabel>
         </Step>
       </Stepper>
+      {/* BILLING INFORMATION */}
       <Box>
         <Formik
           onSubmit={handleFormSubmit}
@@ -106,6 +117,17 @@ const Checkout = () => {
             <form onSubmit={handleSubmit}>
               {isFirstStep && (
                 <BillingInfo
+                  values={values}
+                  errors={errors}
+                  touched={touched}
+                  handleBlur={handleBlur}
+                  handleChange={handleChange}
+                  setFieldValue={setFieldValue}
+                />
+              )}
+
+              {isSecondStep && (
+                <ShippingInfo
                   values={values}
                   errors={errors}
                   touched={touched}

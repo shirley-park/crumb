@@ -70,8 +70,8 @@ const ShoppingCart = () => {
                     <img
                       src={`http://localhost:1337${item?.attributes?.image?.data[0].attributes?.url}`}
                       alt={item?.name}
-                      width="123px"
-                      height="164px"
+                      width="120px"
+                      height="165px"
                     />
                   </Box>
                   <Box flex="1 1 60%">

@@ -1,4 +1,10 @@
-import { Box, Typography, FormControlLabel, Checkbox } from '@mui/material'
+import {
+  Box,
+  Typography,
+  FormControlLabel,
+  Checkbox,
+  TextField,
+} from '@mui/material'
 import AddressForm from './AddressForm'
 
 const BillingInfo = ({
@@ -11,11 +17,38 @@ const BillingInfo = ({
 }) => {
   return (
     <Box m="30px auto">
-      {/* BILLING FORM */}
       <Box>
         <Typography sx={{ mb: '15px' }} fontSize="18px">
           Billing Information
         </Typography>
+        <Box m="30px 0">
+          <Box>
+            <TextField
+              fullWidth
+              type="text"
+              label="Email"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.email}
+              name="email"
+              error={!!touched.email && !!errors.email}
+              helperText={touched.email && errors.email}
+              sx={{ gridColumn: 'span 4', marginBottom: '15px' }}
+            />
+            <TextField
+              fullWidth
+              type="text"
+              label="Phone"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.phone}
+              name="phone"
+              error={!!touched.phone && !!errors.phone}
+              helperText={touched.phone && errors.phone}
+              sx={{ gridColumn: 'span 4' }}
+            />
+          </Box>
+        </Box>
         <AddressForm
           type="billingAddress"
           values={values.billingAddress}
