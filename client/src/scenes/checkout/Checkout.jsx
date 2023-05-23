@@ -125,6 +125,9 @@ const Checkout = () => {
                       borderRadius: '30px',
                       marginTop: '30px',
                       padding: '15px 40px',
+                      '&:hover': {
+                        backgroundColor: shades.primary[300],
+                      },
                     }}
                     onClick={() => setActiveStep(activeStep - 1)}
                   >
@@ -141,6 +144,9 @@ const Checkout = () => {
                     borderRadius: '30px',
                     marginTop: '30px',
                     padding: '15px 40px',
+                    '&:hover': {
+                      backgroundColor: shades.primary[300],
+                    },
                   }}
                 >
                   {!isSecondStep ? 'Next' : 'Place Order'}

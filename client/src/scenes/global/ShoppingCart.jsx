@@ -93,6 +93,7 @@ const ShoppingCart = () => {
                         display="flex"
                         alignItems="center"
                         border={`1.5px solid ${shades.neutral[500]}`}
+                        borderRadius="20px"
                       >
                         <IconButton
                           onClick={() =>
@@ -112,9 +113,7 @@ const ShoppingCart = () => {
                       </Box>
 
                       {/* Price */}
-                      <Typography fontWeight="bold">
-                        ${item.attributes.price}
-                      </Typography>
+                      <Typography>${item.attributes.price}</Typography>
                     </FlexBox>
                   </Box>
                 </FlexBox>
@@ -138,6 +137,9 @@ const ShoppingCart = () => {
                 minWidth: '100%',
                 padding: '20px 40px',
                 m: '20px 0',
+                '&:hover': {
+                  backgroundColor: shades.primary[300],
+                },
               }}
               onClick={() => {
                 navigate('/checkout')
