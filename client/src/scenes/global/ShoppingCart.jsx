@@ -26,14 +26,14 @@ const ShoppingCart = () => {
   const cart = useSelector((state) => state.cart.cart)
   const isCartOpen = useSelector((state) => state.cart.isCartOpen)
 
-  const totalPrice = cart.reduce((total, item) => {
+  const cartSubtotal = cart.reduce((total, item) => {
     return total + item.count * item.attributes.price
   }, 0)
 
   return (
     // overlay
     <Box
-      display={isCartOpen ? 'Block' : 'none'}
+      display={isCartOpen ? 'block' : 'none'}
       backgroundColor="rgba(0, 0, 0, 0.3)"
       position="fixed"
       zIndex={10}
@@ -70,8 +70,8 @@ const ShoppingCart = () => {
                     <img
                       src={`http://localhost:1337${item?.attributes?.image?.data[0].attributes?.url}`}
                       alt={item?.name}
-                      width="123px"
-                      height="164px"
+                      width="120px"
+                      height="165px"
                     />
                   </Box>
                   <Box flex="1 1 60%">
@@ -93,6 +93,7 @@ const ShoppingCart = () => {
                         display="flex"
                         alignItems="center"
                         border={`1.5px solid ${shades.neutral[500]}`}
+                        borderRadius="20px"
                       >
                         <IconButton
                           onClick={() =>
@@ -112,9 +113,7 @@ const ShoppingCart = () => {
                       </Box>
 
                       {/* Price */}
-                      <Typography fontWeight="bold">
-                        ${item.attributes.price}
-                      </Typography>
+                      <Typography>${item.attributes.price}</Typography>
                     </FlexBox>
                   </Box>
                 </FlexBox>
@@ -127,16 +126,20 @@ const ShoppingCart = () => {
           <Box m="20px 0">
             <FlexBox m="20px 0">
               <Typography fontWeight="bold">Subtotal</Typography>
-              <Typography fontWeight="bold">${totalPrice}</Typography>
+              <Typography fontWeight="bold">${cartSubtotal}</Typography>
             </FlexBox>
             <Button
+              disabled={cart.length > 0 ? false : true}
               sx={{
-                backgroundColor: shades.primary[400],
+                backgroundColor: shades.primary[200],
                 color: 'white',
-                borderRadius: '10px',
+                borderRadius: '30px',
                 minWidth: '100%',
                 padding: '20px 40px',
                 m: '20px 0',
+                '&:hover': {
+                  backgroundColor: shades.primary[300],
+                },
               }}
               onClick={() => {
                 navigate('/checkout')

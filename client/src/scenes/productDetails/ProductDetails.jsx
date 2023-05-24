@@ -69,10 +69,13 @@ const ProductDetails = () => {
                 dispatch(addToCart({ item: { ...item, count } }))
               }}
               sx={{
-                backgroundColor: shades.primary[300],
+                backgroundColor: shades.primary[200],
                 color: 'white',
                 marginLeft: '20px',
                 borderRadius: '20px',
+                '&:hover': {
+                  backgroundColor: shades.primary[300],
+                },
               }}
             >
               Add to cart
