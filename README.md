@@ -11,14 +11,14 @@ This project is a work in progress and I'm using it as a way to learn about buil
 - Redux toolkit
 - Tanstack Query
 - Strapi headless CMS
+- Stripe
 - Material UI
 - Framer Motion
 
 ---
 ### Next steps
 
-- [ ] complete checkout process using Formik
-- [ ] add Stripe to accept payments
+- [ ] Form validation in checkout process
 
 ---
 ### Installation
