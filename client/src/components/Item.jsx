@@ -74,7 +74,12 @@ const Item = ({ item, width }) => {
                 backgroundColor: shades.primary[300],
                 color: 'white',
                 borderRadius: '20px',
+                px: '20px',
                 marginLeft: '20px',
+                '&:hover': {
+                  backgroundColor: shades.neutral[300],
+                  color: 'black',
+                },
               }}
             >
               Add to cart
@@ -90,7 +95,7 @@ const Item = ({ item, width }) => {
         mt="3px"
       >
         <Typography>{name}</Typography>
-        <Typography fontWeight="bold">${price}</Typography>
+        <Typography fontWeight="bold">${price.toFixed(2)}</Typography>
       </Box>
     </motion.div>
   )

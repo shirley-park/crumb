@@ -64,7 +64,7 @@ const ShoppingCart = () => {
           {/* shopping bag list */}
           <Box>
             {cart.map((item) => (
-              <Box key={item.attributes.id}>
+              <Box key={`${item.attributes.id} - ${item.attributes.name}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
                     <img
@@ -113,7 +113,9 @@ const ShoppingCart = () => {
                       </Box>
 
                       {/* Price */}
-                      <Typography>${item.attributes.price}</Typography>
+                      <Typography>
+                        ${item.attributes.price.toFixed(2)}
+                      </Typography>
                     </FlexBox>
                   </Box>
                 </FlexBox>
@@ -126,7 +128,9 @@ const ShoppingCart = () => {
           <Box m="20px 0">
             <FlexBox m="20px 0">
               <Typography fontWeight="bold">Subtotal</Typography>
-              <Typography fontWeight="bold">${cartSubtotal}</Typography>
+              <Typography fontWeight="bold">
+                ${cartSubtotal.toFixed(2)}
+              </Typography>
             </FlexBox>
             <Button
               disabled={cart.length > 0 ? false : true}
