@@ -23,7 +23,7 @@ const CheckoutSuccess = () => {
               },
             }}
           >
-            continue shopping
+            Back to the store
           </Button>
         </a>
       </Box>
