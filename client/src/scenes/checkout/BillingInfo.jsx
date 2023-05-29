@@ -21,34 +21,32 @@ const BillingInfo = ({
         <Typography sx={{ mb: '15px' }} fontSize="18px">
           Billing Information
         </Typography>
-        <Box m="30px 0">
-          <Box>
-            <TextField
-              fullWidth
-              type="text"
-              label="Email"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.email}
-              name="email"
-              error={!!touched.email && !!errors.email}
-              helperText={touched.email && errors.email}
-              sx={{ gridColumn: 'span 4', marginBottom: '15px' }}
-            />
-            <TextField
-              fullWidth
-              type="text"
-              label="Phone"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.phone}
-              name="phone"
-              error={!!touched.phone && !!errors.phone}
-              helperText={touched.phone && errors.phone}
-              sx={{ gridColumn: 'span 4' }}
-            />
-          </Box>
-        </Box>
+
+        <TextField
+          fullWidth
+          type="text"
+          label="Email"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={values.email}
+          name="email"
+          error={!!touched.email && !!errors.email}
+          helperText={touched.email && errors.email}
+          sx={{ gridColumn: 'span 4', marginBottom: '15px' }}
+        />
+        <TextField
+          fullWidth
+          type="text"
+          label="Phone"
+          onBlur={handleBlur}
+          onChange={handleChange}
+          value={values.phone}
+          name="phone"
+          error={!!touched.phone && !!errors.phone}
+          helperText={touched.phone && errors.phone}
+          sx={{ gridColumn: 'span 4' }}
+        />
+
         <AddressForm
           type="billingAddress"
           values={values.billingAddress}
@@ -64,7 +62,7 @@ const BillingInfo = ({
           control={
             <Checkbox
               defaultChecked
-              values={values.shippingAddress.isSameAddress}
+              value={values.shippingAddress.isSameAddress}
               onChange={() =>
                 setFieldValue(
                   'shippingAddress.isSameAddress',
@@ -73,7 +71,7 @@ const BillingInfo = ({
               }
             />
           }
-          label="Same for Shipping Address"
+          label="Same shipping address"
         />
       </Box>
 

@@ -71,6 +71,7 @@ const ProductDetails = () => {
               sx={{
                 backgroundColor: shades.primary[200],
                 color: 'white',
+                px: '20px',
                 marginLeft: '20px',
                 borderRadius: '20px',
                 '&:hover': {
