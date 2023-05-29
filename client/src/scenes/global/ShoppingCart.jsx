@@ -27,7 +27,7 @@ const ShoppingCart = () => {
   const isCartOpen = useSelector((state) => state.cart.isCartOpen)
 
   const cartSubtotal = cart.reduce((total, item) => {
-    return total + item.count * item.attributes.price
+    return (total + item.count * item.attributes.price).toFixed(2)
   }, 0)
 
   return (
@@ -113,7 +113,9 @@ const ShoppingCart = () => {
                       </Box>
 
                       {/* Price */}
-                      <Typography>${item.attributes.price}</Typography>
+                      <Typography>
+                        ${item.attributes.price.toFixed(2)}
+                      </Typography>
                     </FlexBox>
                   </Box>
                 </FlexBox>

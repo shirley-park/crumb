@@ -90,7 +90,7 @@ const Item = ({ item, width }) => {
         mt="3px"
       >
         <Typography>{name}</Typography>
-        <Typography fontWeight="bold">${price}</Typography>
+        <Typography fontWeight="bold">${price.toFixed(2)}</Typography>
       </Box>
     </motion.div>
   )
