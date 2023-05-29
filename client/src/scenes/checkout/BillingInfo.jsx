@@ -22,7 +22,6 @@ const BillingInfo = ({
           Billing Information
         </Typography>
 
-        {/* <Box> */}
         <TextField
           fullWidth
           type="text"
@@ -47,7 +46,6 @@ const BillingInfo = ({
           helperText={touched.phone && errors.phone}
           sx={{ gridColumn: 'span 4' }}
         />
-        {/* </Box> */}
 
         <AddressForm
           type="billingAddress"

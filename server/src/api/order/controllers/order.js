@@ -18,7 +18,7 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
             .findOne(product.id);
           return {
             price_data: {
-              currency: "usd",
+              currency: "nzd",
               product_data: {
                 name: item.name,
               },
@@ -32,10 +32,20 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         customer_email: email,
+        line_items: lineItems,
         mode: "payment",
         success_url: `http://localhost:3000/checkout/success`,
         cancel_url: `http://localhost:3000/`,
       });
-    } catch (error) {}
+
+      // create item
+      await strapi.service("api::order.order").create({
+        data: { userName, products, stripeSessionId: session.id },
+      });
+      return { id: session.id };
+    } catch (error) {
+      ctx.response.status = 500;
+      return { error: { message: "Woops there was a problem" } };
+    }
   },
 }));

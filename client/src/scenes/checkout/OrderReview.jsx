@@ -7,16 +7,16 @@ const FlexBox = styled(Box)`
   align-items: center;
 `
 
-const PaymentStep = ({ cart }) => {
+const OrderReview = ({ cart }) => {
   const cartSubtotal = cart.reduce((total, item) => {
-    return total + item.count * item.attributes.price
+    return (total + item.count * item.attributes.price).toFixed(2)
   }, 0)
 
   return (
     <Box m="30px auto">
       <Box>
         <Typography sx={{ mb: '15px' }} fontSize="18px">
-          Place your order
+          Review your order
         </Typography>
         <Box>
           {cart.map((item) => (
@@ -37,16 +37,17 @@ const PaymentStep = ({ cart }) => {
                     </Typography>
                   </FlexBox>
 
-                  <Typography>${item.attributes.price}</Typography>
+                  <Typography>${item.attributes.price.toFixed(2)}</Typography>
 
                   <FlexBox m="15px 0">
-                    <Box display="flex" alignItems="center">
+                    <Box>
                       <Typography>Qty: {item.count}</Typography>
                     </Box>
-
-                    <Typography fontWeight="bold">
-                      ${item.count * item.attributes.price}
-                    </Typography>
+                    <Box>
+                      <Typography fontWeight="bold">
+                        ${(item.count * item.attributes.price).toFixed(2)}
+                      </Typography>
+                    </Box>
                   </FlexBox>
                 </Box>
               </FlexBox>
@@ -56,7 +57,7 @@ const PaymentStep = ({ cart }) => {
         </Box>
         <Box m="20px 0">
           <FlexBox m="20px 0">
-            <Typography fontWeight="bold">Subtotal</Typography>
+            <Typography fontWeight="bold">Total</Typography>
             <Typography fontWeight="bold">${cartSubtotal}</Typography>
           </FlexBox>
         </Box>
@@ -65,4 +66,4 @@ const PaymentStep = ({ cart }) => {
   )
 }
 
-export default PaymentStep
+export default OrderReview
