@@ -64,7 +64,7 @@ const ShoppingCart = () => {
           {/* shopping bag list */}
           <Box>
             {cart.map((item) => (
-              <Box key={item.attributes.id}>
+              <Box key={`${item.attributes.id} - ${item.attributes.name}`}>
                 <FlexBox p="15px 0">
                   <Box flex="1 1 40%">
                     <img

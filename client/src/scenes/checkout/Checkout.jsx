@@ -5,9 +5,12 @@ import { useState } from 'react'
 import * as yup from 'yup'
 import { shades } from '../../theme'
 import BillingInfo from './BillingInfo'
-import ShippingInfo from './ShippingInfo'
+import PaymentStep from './PaymentStep'
 
 const initialValues = {
+  email: '',
+  phone: '',
+
   billingAddress: {
     firstName: '',
     lastName: '',
@@ -25,12 +28,14 @@ const initialValues = {
     postcode: '',
     country: '',
   },
-  email: '',
-  phone: '',
+  // email: '',
+  // phone: '',
 }
 
 const checkoutSchema = [
   yup.object().shape({
+    email: yup.string().required('required'),
+    phone: yup.string().required('required'),
     billingAddress: yup.object().shape({
       firstName: yup.string().required('required'),
       lastName: yup.string().required('required'),
@@ -41,12 +46,30 @@ const checkoutSchema = [
     }),
     shippingAddress: yup.object().shape({
       isSameAddress: yup.boolean(),
-      firstName: yup.string().required('required'),
-      lastName: yup.string().required('required'),
-      streetAddress: yup.string().required('required'),
-      city: yup.string().required('required'),
-      postcode: yup.string().required('required'),
-      country: yup.string().required('required'),
+      firstName: yup.string().when('isSameAddress', {
+        is: false,
+        then: () => yup.string().required('required'),
+      }),
+      lastName: yup.string().when('isSameAddress', {
+        is: false,
+        then: () => yup.string().required('required'),
+      }),
+      streetAddress: yup.string().when('isSameAddress', {
+        is: false,
+        then: () => yup.string().required('required'),
+      }),
+      city: yup.string().when('isSameAddress', {
+        is: false,
+        then: () => yup.string().required('required'),
+      }),
+      postcode: yup.string().when('isSameAddress', {
+        is: false,
+        then: () => yup.string().required('required'),
+      }),
+      country: yup.string().when('isSameAddress', {
+        is: false,
+        then: () => yup.string().required('required'),
+      }),
     }),
   }),
   yup.object().shape({
@@ -58,24 +81,21 @@ const checkoutSchema = [
 const Checkout = () => {
   const [activeStep, setActiveStep] = useState(0)
   const cart = useSelector((state) => state.cart.cart)
-  const isFirstStep = activeStep === 0
-  const isSecondStep = activeStep === 1
-  const isThirdStep = activeStep === 2
-
-  console.log(cart)
-  console.log(isThirdStep)
+  const stepOne = activeStep === 0
+  const stepTwo = activeStep === 1
 
   const handleFormSubmit = async (values, actions) => {
     setActiveStep(activeStep + 1)
 
-    if (isFirstStep && values.shippingAddress.isSameAddress) {
+    // if the shippingAddress is the same, copy over billing address
+    if (stepOne && values.shippingAddress.isSameAddress) {
       actions.setFieldValue('shippingAddress', {
         ...values.billingAddress,
         isSameAddress: true,
       })
     }
 
-    if (isSecondStep) {
+    if (stepTwo) {
       makePayment(values)
     }
 
@@ -89,10 +109,7 @@ const Checkout = () => {
       {/* CHECKOUT STEPS */}
       <Stepper activeStep={activeStep}>
         <Step>
-          <StepLabel>Billing</StepLabel>
-        </Step>
-        <Step>
-          <StepLabel>Shipping</StepLabel>
+          <StepLabel>Billing and shipping</StepLabel>
         </Step>
         <Step>
           <StepLabel>Payment</StepLabel>
@@ -115,7 +132,7 @@ const Checkout = () => {
             setFieldValue,
           }) => (
             <form onSubmit={handleSubmit}>
-              {isFirstStep && (
+              {stepOne && (
                 <BillingInfo
                   values={values}
                   errors={errors}
@@ -126,8 +143,8 @@ const Checkout = () => {
                 />
               )}
 
-              {isSecondStep && (
-                <ShippingInfo
+              {stepTwo && (
+                <PaymentStep
                   values={values}
                   errors={errors}
                   touched={touched}
@@ -137,8 +154,8 @@ const Checkout = () => {
                 />
               )}
 
-              <Box display="flex" justifyContent="space-between" gap="50px">
-                {!isFirstStep && (
+              <Box display="flex" justifyContent="space-between" gap="60px">
+                {stepTwo && (
                   <Button
                     fullWidth
                     variant="contained"
@@ -171,7 +188,7 @@ const Checkout = () => {
                     },
                   }}
                 >
-                  {!isSecondStep ? 'Next' : 'Place Order'}
+                  {!stepTwo ? 'Next' : 'Confirm'}
                 </Button>
               </Box>
             </form>
