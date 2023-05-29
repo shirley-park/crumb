@@ -58,6 +58,7 @@ const OrderReview = ({ cart }) => {
         <Box m="20px 0">
           <FlexBox m="20px 0">
             <Typography fontWeight="bold">Total</Typography>
+
             <Typography fontWeight="bold">
               ${cartSubtotal.toFixed(2)}
             </Typography>
